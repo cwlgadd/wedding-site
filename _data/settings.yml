@@ -13,7 +13,7 @@ theme:
   # background_color: '#ffff'
 
 rsvp:
-  use_code: true
+  use_code: false
   code: 1234
   code_md5: 81dc9bdb52d04dc20036dbd8313ed055
   post_address: https://api.nathanorick.com/rsvp
@@ -31,7 +31,7 @@ rsvp:
   sms_followup_text: You'll receive a text confirmation shortly.
 
   # Comment these out to disable
-  song_text: What songs will get you dancing?
+  # song_text: What songs will get you dancing?
   leave_a_message_text: Leave a message for the bride and groom.
 
 people:

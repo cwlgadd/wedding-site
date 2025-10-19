@@ -2,17 +2,32 @@
   link: /#ourstory
 
 - name: UK
-  link: /celebrations
+  link: /event_uk/
   children:
     - name: Details
-      link: /UK/details
+      link: /event_uk/details
       class: child-muted
     - name: FAQ
-      link: /UK/faq
+      link: /event_uk/faq
       class: child-muted
     - name: City Guide
-      link: /UK/guide
+      link: /event_uk/guide
       class: child-muted
+
+- name: Kerala
+  link: /event_kerala/
+  children:
+    - name: Details
+      link: /event_kerala/details
+      class: child-muted
+    - name: FAQ
+      link: /event_kerala/faq
+      class: child-muted
+    - name: Area Guide
+      link: /event_kerala/guide
+      class: child-muted
+
+
 
 - name: RSVP
   modal_id: rsvp-modal
