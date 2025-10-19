@@ -1,0 +1,89 @@
+<!-- Inline styles for dropdown CHILD items only -->
+<style>
+  /* Tag specific children in _data/navigation.yml with `class: child-accent` or `class: child-muted` */
+  .dropdown-menu .dropdown-item.child-accent { color: #d98560 !important; }
+  .dropdown-menu .dropdown-item.child-accent:hover { opacity: .85; }
+
+  .dropdown-menu .dropdown-item.child-muted { color: rgba(0,0,0,.65) !important; }
+  .dropdown-menu .dropdown-item.child-muted:hover { color: rgba(0,0,0,.9) !important; }
+</style>
+
+<!-- Navigation -->
+<nav
+  class="navbar navbar-custom navbar-expand-lg fixed-top {% if page.invisible_nav %} navbar-hidden-top {% else %} top-nav-collapse {% endif %}"
+  role="navigation"
+  id="navbar"
+>
+  <div class="container">
+    <a class="navbar-brand" href="{{ site.baseurl }}/">
+      {{ site.data.couple.spouse1.short_name | slice: 0 }}
+      &
+      {{ site.data.couple.spouse2.short_name | slice: 0 }}
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbar-main-collapse"
+      aria-controls="navbar-main-collapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar-main-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="d-none">
+          <a class="nav-link" href="#page-top"></a>
+        </li>
+
+        {% assign nav = site.data.navigation %}
+        {% for item in nav %}
+          {% if item.modal_id %}
+            <!-- Modal trigger -->
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#{{ item.modal_id }}">
+                {{ item.name }}
+              </a>
+            </li>
+
+          {% elsif item.children %}
+            <!-- Dropdown parent -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="{{ item.link | relative_url }}"
+                id="nav-{{ item.name | slugify }}"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{ item.name }}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="nav-{{ item.name | slugify }}">
+                {% for child in item.children %}
+                  <li>
+                    <a
+                      class="dropdown-item {% if child.class %}{{ child.class }}{% endif %}"
+                      href="{{ child.link | relative_url }}"
+                    >
+                      {{ child.name }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+
+          {% else %}
+            <!-- Normal link -->
+            <li class="nav-item {% if page.url == item.link or page.url == item.link | append:'/' %}active{% endif %}">
+              <a class="nav-link" href="{{ item.link | relative_url }}">{{ item.name }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
